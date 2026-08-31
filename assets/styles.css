@@ -804,3 +804,9 @@ dialog::backdrop { background: rgba(3, 4, 7, .78); backdrop-filter: blur(8px); }
   .blindspot-detail { max-height: none; padding: 5px 22px 22px; opacity: 1; }
   a { text-decoration: none; }
 }
+
+/* Correctif définitif du calque bloquant le graphe */
+.graph-empty {
+  display: none !important;
+  pointer-events: none !important;
+}
