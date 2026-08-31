@@ -1,4 +1,4 @@
-const CACHE = "conclave-arizona-v1";
+const CACHE = "conclave-arizona-v2-graph-fix";
 const SHELL = [
   "./",
   "./index.html",
