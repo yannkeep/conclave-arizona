@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conclave Arizona — le budget belge sous contraintes</title>
+  <meta name="description" content="Un observatoire interactif du conclave budgétaire belge de l’automne 2026 : graphe des dépendances, simulateur de crédibilité, angles morts, coalition, scénarios et sources primaires.">
+  <meta name="author" content="Une analyse indépendante">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0a0b0f">
+  <link rel="canonical" href="https://yannkeep.github.io/conclave-arizona/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_BE">
+  <meta property="og:title" content="Conclave Arizona — le budget belge sous contraintes">
+  <meta property="og:description" content="Explorez les liens invisibles entre 10 milliards, coalition, dette, défense, santé et exécution.">
+  <meta property="og:url" content="https://yannkeep.github.io/conclave-arizona/">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://yannkeep.github.io/conclave-arizona/#site",
+        "url": "https://yannkeep.github.io/conclave-arizona/",
+        "name": "Conclave Arizona",
+        "inLanguage": "fr-BE",
+        "description": "Observatoire interactif et sourcé du conclave budgétaire belge de l’automne 2026"
+      },
+      {
+        "@type": "Report",
+        "@id": "https://yannkeep.github.io/conclave-arizona/#report",
+        "name": "Angles morts du conclave budgétaire belge de l’automne 2026",
+        "dateModified": "2026-08-31",
+        "inLanguage": "fr-BE",
+        "isPartOf": {"@id": "https://yannkeep.github.io/conclave-arizona/#site"},
+        "about": ["Budget fédéral belge 2027", "Finances publiques", "Coalition Arizona", "Belgique"]
+      },
+      {
+        "@type": "Dataset",
+        "name": "Carte des contraintes du conclave budgétaire belge",
+        "dateModified": "2026-08-31",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "distribution": {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://yannkeep.github.io/conclave-arizona/assets/dataset.json"}
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <a class="skip-link" href="#graph-title">Aller au graphe</a>
+  <div class="ambient-grid" aria-hidden="true"></div>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="#top" aria-label="Conclave Arizona, accueil">
+      <span class="brand-mark" aria-hidden="true">A//10</span>
+      <span class="brand-copy"><strong>CONCLAVE</strong><small>observatoire · 31.08.26</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="Navigation principale">
+      <a href="#graphe">Graphe</a>
+      <a href="#credibilite">Crédibilité</a>
+      <a href="#angles-morts">Angles morts</a>
+      <a href="#coalition">Coalition</a>
+      <a href="#preuves">Preuves</a>
+    </nav>
+    <div class="toolbar" aria-label="Outils">
+      <button class="tool-button search-trigger" type="button" aria-label="Ouvrir la recherche" title="Rechercher (/)" data-action="search">
+        <span aria-hidden="true">⌕</span><span class="tool-label">Rechercher</span><kbd>/</kbd>
+      </button>
+      <button class="icon-button" type="button" aria-label="Ouvrir les éléments sauvegardés" title="Éléments sauvegardés" data-action="saved">
+        <span aria-hidden="true">◇</span><span class="saved-count" aria-live="polite">0</span>
+      </button>
+      <button class="icon-button" type="button" aria-label="Changer de thème" title="Changer de thème" data-action="theme"><span aria-hidden="true">◐</span></button>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav" data-action="menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" hidden>
+    <a href="#graphe">Graphe des contraintes</a>
+    <a href="#credibilite">Stress test</a>
+    <a href="#angles-morts">12 angles morts</a>
+    <a href="#coalition">Coalition</a>
+    <a href="#preuves">Matrice des preuves</a>
+    <a href="#scenarios">Scénarios</a>
+    <a href="#sources">Sources</a>
+  </nav>
+
+  <aside class="progress-rail" aria-label="Progression dans le dossier">
+    <span class="progress-line"><i id="reading-progress"></i></span>
+    <a href="#situation" data-section="situation"><span>00</span><b>Situation</b></a>
+    <a href="#graphe" data-section="graphe"><span>01</span><b>Graphe</b></a>
+    <a href="#credibilite" data-section="credibilite"><span>02</span><b>Stress test</b></a>
+    <a href="#angles-morts" data-section="angles-morts"><span>03</span><b>Angles morts</b></a>
+    <a href="#coalition" data-section="coalition"><span>04</span><b>Coalition</b></a>
+    <a href="#preuves" data-section="preuves"><span>05</span><b>Preuves</b></a>
+    <a href="#sources" data-section="sources"><span>06</span><b>Sources</b></a>
+  </aside>
+
+  <main id="main">
+    <section class="situation" id="situation" aria-labelledby="situation-title">
+      <div class="situation-copy">
+        <p class="eyebrow"><span class="status-dot"></span> Belgique · budget fédéral 2027 · avant arbitrage</p>
+        <h1 id="situation-title">Dix milliards.<br><em>Mais lesquels&nbsp;?</em></h1>
+        <p class="lede">Un chiffre politique ne devient pas une économie parce qu’il entre dans un tableau. Ce laboratoire montre les transferts, délais, doubles comptes et veto qui séparent l’annonce du rendement observable.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#graphe">Entrer dans le graphe <span aria-hidden="true">↘</span></a>
+          <a class="button button-ghost" href="downloads/rapport-complementaire-angles-morts-2026.pdf" download>Télécharger le rapport <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="microcopy">Recherche arrêtée au 31 août 2026 · faits, options et inconnues séparés</p>
+      </div>
+
+      <div class="situation-board" aria-label="Tableau de situation budgétaire">
+        <div class="board-header">
+          <span>SITUATION ROOM / 2027—2031</span>
+          <span class="live-label">scénario inchangé</span>
+        </div>
+        <article class="target-card">
+          <p>Cible politique complémentaire</p>
+          <strong><span>€</span>10<small>Md</small></strong>
+          <div class="target-scale" aria-label="Ventilation non publique"><span style="--w:100%">ventilation non publique</span></div>
+          <p class="card-note">Composition et profil annuel non publics.</p>
+        </article>
+        <div class="metric-strip">
+          <article><span>Déficit 2027</span><strong>5,1<small>% PIB</small></strong><em>ensemble public</em></article>
+          <article><span>Dette 2027</span><strong>112,7<small>% PIB</small></strong><em>scénario BOSA</em></article>
+          <article><span>Dette 2031</span><strong>122,6<small>% PIB</small></strong><em>sans mesures</em></article>
+        </div>
+        <div class="signal-row">
+          <span><i class="signal signal-fact"></i> confirmé</span>
+          <span><i class="signal signal-option"></i> option</span>
+          <span><i class="signal signal-unknown"></i> inconnu</span>
+          <button type="button" class="text-button" data-jump-node="target">Voir les dépendances →</button>
+        </div>
+      </div>
+
+      <div class="thesis-band">
+        <span class="thesis-index">THÈSE / 01</span>
+        <p>Le risque n’est pas seulement de rater un accord. <strong>C’est de réussir un mauvais accord.</strong></p>
+        <p>La qualité se juge sur cinq verbes&nbsp;: <span>attribuer</span>, <span>dater</span>, <span>chiffrer</span>, <span>tester</span>, <span>corriger</span>.</p>
+      </div>
+    </section>
+
+    <section class="section graph-section" id="graphe" aria-labelledby="graph-title">
+      <header class="section-header split-header">
+        <div>
+          <p class="section-number">01 — CARTOGRAPHIE SYSTÉMIQUE</p>
+          <h2 id="graph-title">Le budget n’est pas une liste.<br><em>C’est un réseau de conséquences.</em></h2>
+        </div>
+        <p class="section-intro">Filtrez 37 nœuds et leurs dépendances. Chaque lien répond à une question simple&nbsp;: qu’est-ce qui change si cette hypothèse cède&nbsp;?</p>
+      </header>
+
+      <div class="graph-workbench" data-component="graph">
+        <div class="graph-toolbar" aria-label="Contrôles du graphe">
+          <div class="filter-group" role="group" aria-label="Filtrer par famille">
+            <button class="filter-chip active" type="button" data-graph-filter="all" aria-pressed="true">Tout <span>37</span></button>
+            <button class="filter-chip" type="button" data-graph-filter="metric" aria-pressed="false">Chiffres</button>
+            <button class="filter-chip" type="button" data-graph-filter="blindspot" aria-pressed="false">Angles morts</button>
+            <button class="filter-chip" type="button" data-graph-filter="actor" aria-pressed="false">Acteurs</button>
+            <button class="filter-chip" type="button" data-graph-filter="source" aria-pressed="false">Sources</button>
+          </div>
+          <label class="graph-search"><span class="sr-only">Rechercher dans le graphe</span><input id="graph-search" type="search" placeholder="Filtrer le graphe…" autocomplete="off"><span aria-hidden="true">⌕</span></label>
+          <div class="graph-actions">
+            <button class="icon-button" type="button" data-graph-action="zoom-out" aria-label="Dézoomer">−</button>
+            <button class="icon-button" type="button" data-graph-action="reset" aria-label="Recentrer">◎</button>
+            <button class="icon-button" type="button" data-graph-action="zoom-in" aria-label="Zoomer">＋</button>
+            <button class="icon-button" type="button" data-graph-action="export" aria-label="Exporter le graphe en SVG">⇩</button>
+          </div>
+        </div>
+
+        <div class="graph-stage">
+          <div class="graph-canvas-wrap">
+            <svg id="constraint-graph" class="constraint-graph" role="img" aria-labelledby="graph-svg-title graph-svg-desc" viewBox="0 0 1200 720" tabindex="0">
+              <title id="graph-svg-title">Graphe interactif des contraintes budgétaires belges</title>
+              <desc id="graph-svg-desc">La cible des dix milliards est reliée aux métriques, aux partis, aux douze angles morts et aux principales sources officielles. Utilisez les filtres ou les flèches du clavier pour explorer.</desc>
+              <defs>
+                <filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"></feGaussianBlur><feMerge><feMergeNode in="coloredBlur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+                <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>
+              </defs>
+              <g id="graph-viewport"><g id="graph-links"></g><g id="graph-nodes"></g></g>
+            </svg>
+            <div class="graph-empty" hidden>Aucun nœud ne correspond à ce filtre.</div>
+            <div class="graph-hint" aria-hidden="true"><span>glisser</span><span>molette = zoom</span><span>clic = fiche</span></div>
+          </div>
+
+          <aside class="node-inspector" id="node-inspector" aria-live="polite" aria-label="Fiche du nœud sélectionné">
+            <div class="inspector-id"><span id="node-type">POINT D’ENTRÉE</span><button class="save-node" type="button" aria-label="Sauvegarder ce nœud" data-save-current>◇</button></div>
+            <p class="inspector-kicker" id="node-kicker">Le centre du problème</p>
+            <h3 id="node-title">€10 milliards</h3>
+            <p id="node-description">Cible politique complémentaire à atteindre d’ici la fin de la législature. Le paquet, son profil annuel et sa référence ne sont pas encore publiés.</p>
+            <dl class="node-meta">
+              <div><dt>Statut</dt><dd id="node-status">engagement politique</dd></div>
+              <div><dt>Horizon</dt><dd id="node-horizon">2027—2029</dd></div>
+              <div><dt>Confiance</dt><dd id="node-confidence">moyenne</dd></div>
+            </dl>
+            <div class="node-question"><span>QUESTION DÉCISIVE</span><p id="node-question">Quelle part est nouvelle, structurelle et exécutable en 2027&nbsp;?</p></div>
+            <div class="node-sources"><span>PISTES</span><div id="node-sources"></div></div>
+            <button class="button button-ghost inspector-action" type="button" data-action="trace">Isoler ses liens <span aria-hidden="true">↗</span></button>
+          </aside>
+        </div>
+
+        <div class="graph-footer">
+          <div class="legend" aria-label="Légende du graphe">
+            <span><i class="legend-dot metric"></i> chiffre</span>
+            <span><i class="legend-dot blindspot"></i> angle mort</span>
+            <span><i class="legend-dot actor"></i> acteur</span>
+            <span><i class="legend-dot source"></i> preuve</span>
+          </div>
+          <p><strong>Lecture.</strong> La proximité visualise une relation documentée ou analytique, pas une causalité prouvée.</p>
+        </div>
+      </div>
+
+      <div class="graph-accessible">
+        <details>
+          <summary>Alternative textuelle au graphe</summary>
+          <div id="graph-list" class="graph-list"></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section credibility-section" id="credibilite" aria-labelledby="credibility-title">
+      <header class="section-header">
+        <p class="section-number">02 — STRESS TEST DU CHIFFRE</p>
+        <h2 id="credibility-title">Du montant affiché<br><em>au rendement crédible.</em></h2>
+        <p class="section-intro">Un modèle transparent, modifiable et volontairement prudent. Ce n’est pas une prévision&nbsp;: c’est une machine à poser les bonnes questions.</p>
+      </header>
+
+      <div class="simulator-grid">
+        <div class="simulator-controls">
+          <div class="preset-row" role="group" aria-label="Préréglages du simulateur">
+            <button type="button" class="preset active" data-preset="nominal">Accord nominal</button>
+            <button type="button" class="preset" data-preset="prudent">Accord prudent</button>
+            <button type="button" class="preset" data-preset="structural">Accord structurel</button>
+          </div>
+          <div id="simulator-sliders"></div>
+          <button type="button" class="text-button reset-simulator" data-action="reset-simulator">Réinitialiser les hypothèses</button>
+        </div>
+
+        <div class="simulator-output" aria-live="polite">
+          <div class="output-head"><span>RENDEMENT NET ESTIMÉ</span><span class="heuristic-label">modèle heuristique</span></div>
+          <div class="net-value"><strong id="net-value">4,6</strong><span>Md€</span></div>
+          <div class="credibility-gauge" aria-label="Ratio de crédibilité"><i id="credibility-gauge"></i><span id="credibility-ratio">46 % du montant affiché</span></div>
+          <div class="waterfall" id="waterfall" aria-label="Décomposition du montant affiché au rendement net"></div>
+          <div class="output-verdict">
+            <span id="output-code">SIGNAL ORANGE</span>
+            <p id="output-verdict">La distance entre annonce et rendement justifie une réserve de prudence explicite.</p>
+          </div>
+          <p class="fine-print">Les valeurs par défaut illustrent des catégories de risque, pas les paramètres d’un accord inexistant. Aucune addition ne remplace une certification BOSA, BFP ou Cour des comptes.</p>
+        </div>
+      </div>
+
+      <div class="definition-cards">
+        <article><span>01</span><h3>Brut ≠ net</h3><p>Compensations, coûts administratifs et comportements réduisent le rendement.</p></article>
+        <article><span>02</span><h3>2029 ≠ cumul</h3><p>Un régime de croisière n’est pas une économie encaissée chaque année.</p></article>
+        <article><span>03</span><h3>Fédéral ≠ consolidé</h3><p>Une dépense transférée au CPAS reste une dépense publique.</p></article>
+        <article><span>04</span><h3>Option ≠ décision</h3><p>Un catalogue technique ne prouve ni accord ni exécution.</p></article>
+      </div>
+    </section>
+
+    <section class="section blindspots-section" id="angles-morts" aria-labelledby="blindspots-title">
+      <header class="section-header split-header">
+        <div>
+          <p class="section-number">03 — CE QUE LES ANNEXES LAISSENT HORS CHAMP</p>
+          <h2 id="blindspots-title">Douze angles morts.<br><em>Une même faille&nbsp;: l’exécution.</em></h2>
+        </div>
+        <div class="section-controls">
+          <label><span class="sr-only">Filtrer les angles morts</span><select id="blindspot-filter"><option value="all">Tous les domaines</option><option value="long-terme">Long terme</option><option value="social">Social</option><option value="execution">Exécution</option><option value="fiscal">Fiscalité</option><option value="gouvernance">Gouvernance</option></select></label>
+          <button class="text-button" type="button" data-action="expand-blindspots">Tout développer</button>
+        </div>
+      </header>
+      <div class="blindspot-grid" id="blindspot-grid"></div>
+    </section>
+
+    <section class="section coalition-section" id="coalition" aria-labelledby="coalition-title">
+      <header class="section-header">
+        <p class="section-number">04 — GÉOMÉTRIE POLITIQUE</p>
+        <h2 id="coalition-title">Cinq partis.<br><em>Aucun chemin sans veto.</em></h2>
+        <p class="section-intro">Les positions publiques tracent un espace de négociation, pas un pronostic. Cliquez sur un parti pour voir ses lignes rouges et ses ouvertures.</p>
+      </header>
+
+      <div class="coalition-lab">
+        <div class="party-orbit" id="party-orbit" role="group" aria-label="Partis de la coalition Arizona">
+          <svg class="tension-lines" viewBox="0 0 600 420" aria-hidden="true"><path d="M300 55 L510 185 L430 365 L170 365 L90 185 Z"></path><path d="M300 55 L430 365 M510 185 L170 365 M90 185 L510 185"></path></svg>
+        </div>
+        <article class="party-inspector" id="party-inspector">
+          <p class="inspector-kicker" id="party-role">Premier ministre · Finances · Défense</p>
+          <h3 id="party-name">N-VA</h3>
+          <blockquote id="party-axis">Assainir d’abord par les dépenses, l’activation et les réformes structurelles.</blockquote>
+          <dl>
+            <div><dt>Ligne rouge</dt><dd id="party-redline"></dd></div>
+            <div><dt>Ouverture</dt><dd id="party-open"></dd></div>
+            <div><dt>Friction</dt><dd id="party-friction"></dd></div>
+          </dl>
+          <p class="party-source" id="party-source"></p>
+        </article>
+      </div>
+
+      <div class="tension-table-wrap">
+        <table class="tension-table">
+          <caption>Six axes de tension documentés</caption>
+          <thead><tr><th scope="col">Axe</th><th scope="col">Pôle A</th><th scope="col">Pôle B</th><th scope="col">Intensité</th><th scope="col">Variable de compromis</th></tr></thead>
+          <tbody id="tension-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section evidence-section" id="preuves" aria-labelledby="evidence-title">
+      <header class="section-header split-header">
+        <div>
+          <p class="section-number">05 — AUDIT DES ANNEXES</p>
+          <h2 id="evidence-title">Quatre documents.<br><em>Des niveaux de preuve très différents.</em></h2>
+        </div>
+        <p class="section-intro">La matrice n’attribue pas une note de vérité. Elle évalue la capacité de chaque annexe à séparer fait, option, date et périmètre.</p>
+      </header>
+
+      <div class="evidence-layout">
+        <div class="matrix-wrap" role="region" aria-label="Matrice comparative des annexes" tabindex="0">
+          <table class="evidence-matrix">
+            <thead><tr><th scope="col">Critère</th><th scope="col">PDF 2027</th><th scope="col">Conclave 2026</th><th scope="col">Prochain conclave</th><th scope="col">Analyse</th></tr></thead>
+            <tbody id="evidence-matrix-body"></tbody>
+          </table>
+        </div>
+        <aside class="audit-verdict">
+          <span class="audit-score">BASE<br><strong>PDF</strong></span>
+          <h3>Le document le plus prudent doit piloter le statut des affirmations.</h3>
+          <p>Les trois DOCX restent utiles comme cartes de discours et de risques, mais ils ne peuvent pas établir seuls la chronologie factuelle.</p>
+          <ul>
+            <li><span>01</span> Dater chaque affirmation</li>
+            <li><span>02</span> Remonter à une source indépendante</li>
+            <li><span>03</span> Séparer fédéral et entités fédérées</li>
+            <li><span>04</span> Marquer les futurs racontés au passé</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="status-protocol">
+        <h3>Le protocole des cinq statuts</h3>
+        <div id="status-protocol-list"></div>
+      </div>
+    </section>
+
+    <section class="section scenarios-section" id="scenarios" aria-labelledby="scenarios-title">
+      <header class="section-header">
+        <p class="section-number">06 — TROIS SORTIES DU CONCLAVE</p>
+        <h2 id="scenarios-title">Pas des probabilités.<br><em>Des profils de risque.</em></h2>
+      </header>
+      <div class="scenario-tabs" role="tablist" aria-label="Scénarios">
+        <button type="button" role="tab" aria-selected="true" aria-controls="scenario-panel" data-scenario="mix">A / COMPROMIS MIXTE</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="scenario-panel" data-scenario="cuts">B / DÉPENSES</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="scenario-panel" data-scenario="delay">C / RETARD</button>
+      </div>
+      <div class="scenario-panel" id="scenario-panel" role="tabpanel"></div>
+      <p class="method-note">Échelle heuristique 1–5 construite à partir des veto publics, contraintes juridiques, réserves d’exécution et canaux macroéconomiques. Elle n’est ni une prévision électorale ni une probabilité.</p>
+    </section>
+
+    <section class="section timeline-section" id="horizon" aria-labelledby="timeline-title">
+      <header class="section-header split-header">
+        <div>
+          <p class="section-number">07 — LE TEMPS LONG QUE LE CONCLAVE COMPRIME</p>
+          <h2 id="timeline-title">Trois nuits d’arbitrage.<br><em>Dix ans de conséquences.</em></h2>
+        </div>
+        <p class="section-intro">Les principales échéances ne partagent ni le même budget, ni le même décideur, ni le même degré de certitude.</p>
+      </header>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="section checklist-section" id="checklist" aria-labelledby="checklist-title">
+      <header class="section-header split-header">
+        <div>
+          <p class="section-number">08 — LE JOUR DE L’ACCORD</p>
+          <h2 id="checklist-title">Quinze questions<br><em>avant de croire le total.</em></h2>
+        </div>
+        <p class="section-intro">Une checklist mémorisée dans votre navigateur. Cochez-la en conférence de presse, exportez-la et recommencez quand les tableaux complets paraissent.</p>
+      </header>
+      <div class="checklist-progress"><span id="checklist-count">0 / 15 contrôles</span><i><b id="checklist-bar"></b></i><button type="button" class="text-button" data-action="export-checklist">Exporter</button></div>
+      <ol class="decision-checklist" id="decision-checklist"></ol>
+    </section>
+
+    <section class="section sources-section" id="sources" aria-labelledby="sources-title">
+      <header class="section-header split-header">
+        <div>
+          <p class="section-number">09 — REGISTRE DES PREUVES</p>
+          <h2 id="sources-title">Une source doit pouvoir<br><em>contredire le récit.</em></h2>
+        </div>
+        <div class="source-summary"><strong>26</strong><span>sources principales<br>vérifiables</span></div>
+      </header>
+
+      <div class="sources-toolbar">
+        <label class="source-search"><span class="sr-only">Rechercher dans les sources</span><input id="source-search" type="search" placeholder="Institution, thème, identifiant…"><span aria-hidden="true">⌕</span></label>
+        <div class="filter-group" role="group" aria-label="Filtrer les sources">
+          <button class="filter-chip active" type="button" data-source-filter="all" aria-pressed="true">Toutes</button>
+          <button class="filter-chip" type="button" data-source-filter="belgique" aria-pressed="false">Belgique</button>
+          <button class="filter-chip" type="button" data-source-filter="europe" aria-pressed="false">Europe</button>
+          <button class="filter-chip" type="button" data-source-filter="international" aria-pressed="false">International</button>
+        </div>
+      </div>
+      <div class="source-ledger" id="source-ledger"></div>
+
+      <div class="method-grid">
+        <article><span>MÉTHODE</span><h3>Priorité aux sources primaires</h3><p>BOSA, Bureau du Plan, BNB, Commission, Conseil, Cour des comptes, Statbel et textes légaux priment sur les commentaires.</p></article>
+        <article><span>LIMITE</span><h3>Le paquet final n’existe pas encore</h3><p>Le site ne microsimule pas des paramètres inconnus et requalifie les chiffres politiques comme engagements.</p></article>
+        <article><span>VERSION</span><h3>Arrêté au 31 août 2026</h3><p>Toute décision postérieure doit être intégrée avec une date, une base juridique et un journal de correction.</p></article>
+      </div>
+    </section>
+
+    <section class="closing-section" aria-labelledby="closing-title">
+      <p class="section-number">CONCLUSION</p>
+      <h2 id="closing-title">Le vrai chiffre n’est pas dix.<br><em>C’est la part qui survivra au réel.</em></h2>
+      <p>Juridiquement décidée. Administrativement exécutable. Socialement mesurée. Effectivement observable dans les comptes 2027–2029.</p>
+      <div class="closing-actions">
+        <a class="button button-primary" href="downloads/rapport-complementaire-angles-morts-2026.pdf" download>Rapport complet · PDF <span aria-hidden="true">↓</span></a>
+        <button class="button button-ghost" type="button" data-action="share">Copier le lien de cette vue <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><a class="brand footer-brand" href="#top"><span class="brand-mark">A//10</span><span class="brand-copy"><strong>CONCLAVE</strong><small>outil de lecture critique</small></span></a></div>
+    <div><p>Site statique · aucun traqueur · aucune donnée envoyée.</p><p>Les notes, vues et coches restent dans votre navigateur.</p></div>
+    <div><a href="https://github.com/yannkeep/conclave-arizona">Code source ↗</a><a href="downloads/rapport-complementaire-angles-morts-2026.docx" download>Rapport DOCX ↓</a><button class="link-button" type="button" data-action="shortcuts">Raccourcis clavier</button></div>
+    <div><p>Mise à jour</p><strong>31.08.2026</strong></div>
+  </footer>
+
+  <dialog class="command-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
+    <form method="dialog" class="dialog-shell">
+      <div class="dialog-header">
+        <label><span class="sr-only" id="search-dialog-title">Rechercher dans tout le dossier</span><span aria-hidden="true">⌕</span><input id="global-search" type="search" placeholder="Rechercher un chiffre, un parti, une source…" autocomplete="off"></label>
+        <button value="cancel" aria-label="Fermer">Échap</button>
+      </div>
+      <div class="search-results" id="search-results"><p class="search-placeholder">Essayez « défense », « CPAS », « 10 milliards » ou « S11 ».</p></div>
+      <div class="dialog-footer"><span>↑↓ naviguer</span><span>↵ ouvrir</span><span>/ rechercher</span></div>
+    </form>
+  </dialog>
+
+  <dialog class="saved-dialog" id="saved-dialog" aria-labelledby="saved-title">
+    <div class="dialog-shell">
+      <div class="dialog-header"><h2 id="saved-title">Votre dossier local</h2><button type="button" data-close-dialog aria-label="Fermer">×</button></div>
+      <div class="saved-list" id="saved-list"></div>
+      <div class="dialog-actions"><button class="button button-ghost" type="button" data-action="clear-saved">Tout effacer</button><button class="button button-primary" type="button" data-action="export-saved">Exporter JSON</button></div>
+    </div>
+  </dialog>
+
+  <dialog class="shortcuts-dialog" id="shortcuts-dialog" aria-labelledby="shortcuts-title">
+    <div class="dialog-shell compact-dialog">
+      <div class="dialog-header"><h2 id="shortcuts-title">Raccourcis</h2><button type="button" data-close-dialog aria-label="Fermer">×</button></div>
+      <dl class="shortcut-list"><div><dt><kbd>/</kbd></dt><dd>Recherche globale</dd></div><div><dt><kbd>G</kbd></dt><dd>Ouvrir le graphe</dd></div><div><dt><kbd>S</kbd></dt><dd>Aller aux sources</dd></div><div><dt><kbd>R</kbd></dt><dd>Recentrer le graphe</dd></div><div><dt><kbd>Échap</kbd></dt><dd>Fermer une fenêtre</dd></div></dl>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript><div class="noscript">JavaScript est requis pour le graphe, les filtres et le simulateur. Le rapport complet reste disponible en <a href="downloads/rapport-complementaire-angles-morts-2026.pdf">PDF</a>.</div></noscript>
+  <script src="assets/data.js" defer></script>
+  <script src="assets/graph.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

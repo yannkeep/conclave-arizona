@@ -1,0 +1,14 @@
+{
+  "name": "Conclave Arizona — Observatoire budgétaire belge",
+  "short_name": "Conclave",
+  "description": "Graphe, stress test, angles morts et sources du conclave budgétaire belge de l’automne 2026.",
+  "lang": "fr-BE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090a0e",
+  "theme_color": "#090a0e",
+  "icons": [
+    {"src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}

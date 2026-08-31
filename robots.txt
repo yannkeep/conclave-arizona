@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yannkeep.github.io/conclave-arizona/sitemap.xml
